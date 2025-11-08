@@ -1,5 +1,61 @@
 // Intro page interactions and effects
 
+// Loading Screen
+let totalImages = 0;
+let loadedImages = 0;
+
+function initLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadingProgress = document.querySelector('.loading-progress');
+    const loadingPercentage = document.querySelector('.loading-percentage');
+    
+    // Get all images on the page
+    const images = document.querySelectorAll('img');
+    totalImages = images.length;
+    
+    if (totalImages === 0) {
+        hideLoadingScreen();
+        return;
+    }
+    
+    images.forEach(img => {
+        if (img.complete) {
+            imageLoaded();
+        } else {
+            img.addEventListener('load', imageLoaded);
+            img.addEventListener('error', imageLoaded); // Count errors too
+        }
+    });
+    
+    function imageLoaded() {
+        loadedImages++;
+        const percentage = Math.round((loadedImages / totalImages) * 100);
+        
+        if (loadingProgress) {
+            loadingProgress.style.width = percentage + '%';
+        }
+        if (loadingPercentage) {
+            loadingPercentage.textContent = percentage + '%';
+        }
+        
+        if (loadedImages >= totalImages) {
+            setTimeout(hideLoadingScreen, 500);
+        }
+    }
+    
+    function hideLoadingScreen() {
+        if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    }
+    
+    // Fallback: hide after 5 seconds if something goes wrong
+    setTimeout(hideLoadingScreen, 5000);
+}
+
 // Password Protection
 const CORRECT_PASSWORD = "19martie";
 let isAuthenticated = false;
@@ -95,6 +151,9 @@ function hidePasswordModal() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize loading screen
+    initLoadingScreen();
+    
     // Check if user is already authenticated
     const sessionAuth = sessionStorage.getItem('authenticated');
     if (sessionAuth === 'true') {

@@ -1,4 +1,76 @@
 // General animations and interactions
+
+// Loading Screen
+let totalImages = 0;
+let loadedImages = 0;
+
+function initLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadingProgress = document.querySelector('.loading-progress');
+    const loadingPercentage = document.querySelector('.loading-percentage');
+    
+    if (!loadingScreen) return;
+    
+    // Get all images on the page
+    const images = document.querySelectorAll('img');
+    const videos = document.querySelectorAll('video');
+    totalImages = images.length + videos.length;
+    
+    if (totalImages === 0) {
+        hideLoadingScreen();
+        return;
+    }
+    
+    images.forEach(img => {
+        if (img.complete) {
+            imageLoaded();
+        } else {
+            img.addEventListener('load', imageLoaded);
+            img.addEventListener('error', imageLoaded);
+        }
+    });
+    
+    videos.forEach(video => {
+        if (video.readyState >= 2) {
+            imageLoaded();
+        } else {
+            video.addEventListener('loadeddata', imageLoaded);
+            video.addEventListener('error', imageLoaded);
+        }
+    });
+    
+    function imageLoaded() {
+        loadedImages++;
+        const percentage = Math.round((loadedImages / totalImages) * 100);
+        
+        if (loadingProgress) {
+            loadingProgress.style.width = percentage + '%';
+        }
+        if (loadingPercentage) {
+            loadingPercentage.textContent = percentage + '%';
+        }
+        
+        if (loadedImages >= totalImages) {
+            setTimeout(hideLoadingScreen, 500);
+        }
+    }
+    
+    function hideLoadingScreen() {
+        if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    }
+    
+    // Fallback: hide after 10 seconds if something goes wrong
+    setTimeout(hideLoadingScreen, 10000);
+}
+
+// Initialize loading screen on page load
+initLoadingScreen();
+
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
