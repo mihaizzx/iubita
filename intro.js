@@ -78,7 +78,7 @@ function showPasswordModal() {
     const passwordModal = document.getElementById('passwordModal');
     if (passwordModal) {
         passwordModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open');
     }
 }
 
@@ -88,7 +88,8 @@ function hidePasswordModal() {
         passwordModal.style.opacity = '0';
         setTimeout(() => {
             passwordModal.style.display = 'none';
-            document.body.style.overflow = 'hidden';
+            // Remove modal-open class to allow scrolling
+            document.body.classList.remove('modal-open');
         }, 300);
     }
 }
