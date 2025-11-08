@@ -86,45 +86,62 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if device supports orientation
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
+    console.log('Device detection:', { isMobile, hasDeviceOrientation: !!window.DeviceOrientationEvent, cardsFound: cards.length });
+    
     if (isMobile && window.DeviceOrientationEvent) {
         // Request permission for iOS 13+
         if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            console.log('iOS device detected - will request permission on first interaction');
             // Add a tap listener to request permission
-            document.addEventListener('click', function requestGyro() {
+            const requestGyro = function() {
+                console.log('Requesting gyroscope permission...');
                 DeviceOrientationEvent.requestPermission()
                     .then(permissionState => {
+                        console.log('Gyroscope permission:', permissionState);
                         if (permissionState === 'granted') {
                             gyroPermissionGranted = true;
                             enableGyroTilt();
                         }
                     })
-                    .catch(console.error);
+                    .catch(err => {
+                        console.error('Gyroscope permission error:', err);
+                    });
                 document.removeEventListener('click', requestGyro);
-            }, { once: true });
+                document.removeEventListener('touchstart', requestGyro);
+            };
+            
+            document.addEventListener('click', requestGyro);
+            document.addEventListener('touchstart', requestGyro);
         } else {
             // Android or older iOS - no permission needed
+            console.log('Android/older iOS detected - enabling gyroscope directly');
             gyroPermissionGranted = true;
             enableGyroTilt();
         }
     }
     
     function enableGyroTilt() {
+        console.log('Gyroscope tilt enabled! Tilt your phone to see cards move.');
+        
         window.addEventListener('deviceorientation', function(event) {
             const beta = event.beta;   // -180 to 180 (front-back tilt)
             const gamma = event.gamma; // -90 to 90 (left-right tilt)
             
-            cards.forEach(card => {
-                // Normalize values for better effect
-                const rotateX = Math.max(-20, Math.min(20, beta / 3));
-                const rotateY = Math.max(-20, Math.min(20, gamma / 3));
-                
-                card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-            });
-        });
+            if (beta !== null && gamma !== null) {
+                cards.forEach(card => {
+                    // Normalize values for better effect
+                    const rotateX = Math.max(-20, Math.min(20, beta / 3));
+                    const rotateY = Math.max(-20, Math.min(20, gamma / 3));
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
+            }
+        }, true);
     }
     
     // Desktop mouse tilt (only if not mobile)
     if (!isMobile) {
+        console.log('Desktop detected - enabling mouse tilt');
         cards.forEach(card => {
             card.addEventListener('mousemove', function(e) {
                 const rect = card.getBoundingClientRect();
@@ -144,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
             });
         });
+    } else {
+        console.log('Mobile detected - mouse events disabled');
     }
 
     // Add ripple effect to CTA button
