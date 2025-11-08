@@ -1,0 +1,83 @@
+﻿=== SABLON PENTRU CALENDAR ADVENT ===
+
+Copiaza acest sablon si completeaza pentru fiecare zi (1-25):
+
+Ziua 1 (1 decembrie):
+  Poza: images/zi1.jpg
+  Amintire: [Completeaza cu o amintire]
+  Mesaj: [Completeaza cu mesaj romantic]
+  Activitate: [Optional - o activitate de facut impreuna]
+
+Ziua 2 (2 decembrie):
+  Poza: images/zi2.jpg
+  Amintire: 
+  Mesaj: 
+  Activitate: 
+
+Ziua 3 (3 decembrie):
+  Poza: images/zi3.jpg
+  Amintire: 
+  Mesaj: 
+  Activitate: 
+
+Ziua 4 (4 decembrie):
+  Poza: images/zi4.jpg
+  Amintire: 
+  Mesaj: 
+  Activitate: 
+
+Ziua 5 (5 decembrie):
+  Poza: images/zi5.jpg
+  Amintire: 
+  Mesaj: 
+  Activitate: 
+
+... si asa mai departe pana la ziua 25!
+
+Ziua 25 (25 decembrie - CRACIUN):
+  Poza: images/zi25.jpg
+  Mesaj Special: [Cel mai important mesaj pentru Craciun!]
+
+
+=== IDEI PENTRU CONTINUT ===
+
+AMINTIRI:
+- Prima intalnire
+- Primul sarut
+- Prima vacanta
+- O zi memorabila
+- Un moment emotionant
+- O gluma interna
+- Un eveniment special
+
+MESAJE:
+- De ce o iubesti
+- Ce apreciezi la ea
+- Un compliment
+- O promisiune
+- Un vis pentru viitor
+- Ceva ce te face fericit
+
+ACTIVITATI:
+- Uitati-va la un film
+- Gatiti impreuna
+- Faceti o plimbare
+- Jucati un joc
+- Asculta muzica
+- Dance
+- Foto impreuna
+- Ceva romantic
+
+=== POZE NECESARE ===
+
+Trebuie sa adaugi in folderul images/:
+- zi1.jpg pana la zi25.jpg (25 de poze)
+- SAU poti folosi aceeasi poza pentru mai multe zile
+- SAU poti folosi pozele photo1.jpg - photo8.jpg deja existente
+
+IMPORTANT:
+- Fiecare zi trebuie sa aiba continut
+- Ziua 25 este cea mai speciala (Craciun)
+- Poti adauga emojis:      
+
+Dupa ce completezi, trimite-mi textele si le adaug in calendar-data.js!

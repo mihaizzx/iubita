@@ -9,14 +9,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        // Check authentication
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'intro.html';
+        }
+    </script>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container">
-            <div class="logo">M & A</div>
+            <div class="logo">M & N</div>
             <nav>
-                <a href="index.html">Acasa</a>
+                <a href="main.html">Acasa</a>
                 <a href="calendar.html" class="active">Calendar</a>
                 <a href="message.html">Mesajul meu</a>
             </nav>
@@ -146,7 +152,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>Facut cu drag pentru tine <span class="heart-pulse"></span></p>
+            <p>Te iubesc, ramo<span class="heart-pulse"></span></p>
         </div>
     </footer>
 
@@ -154,3 +160,7 @@
     <script src="calendar.js"></script>
 </body>
 </html>
+
+
+
+

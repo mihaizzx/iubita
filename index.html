@@ -1,154 +1,48 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventul Nostru ❤️</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Te iubesc ❤️</title>
+    <meta http-equiv="refresh" content="0; url=intro.html">
+    <script>
+        // Redirect to intro (password protected)
+        window.location.href = "intro.html";
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #8B2635 0%, #6B1E2B 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="logo">M & N</div>
-            <nav>
-                <a href="index.html" class="active">Acasă</a>
-                <a href="calendar.html">Calendar</a>
-                <a href="message.html">Mesajul meu</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="snowflakes" aria-hidden="true">
-                <div class="snowflake">❄</div>
-                <div class="snowflake">❄</div>
-                <div class="snowflake">❄</div>
-                <div class="snowflake">❄</div>
-                <div class="snowflake">❄</div>
-            </div>
-            <h1>Adventul Nostru</h1>
-            <p class="hero-text">În fiecare zi, câte o surpriză, o amintire, un motiv pentru care te iubesc.</p>
-            <div class="heart-divider">
-                <span class="heart">❤️</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section class="about-us">
-        <div class="container">
-            <div class="about-card">
-                <div class="about-icon">💑</div>
-                <h3>Cum ne-am întâlnit</h3>
-                <p>A fost o zi de primăvară când destinul ne-a adus împreună. De atunci, fiecare moment petrecut alături de tine a fost o binecuvântare.</p>
-            </div>
-            
-            <div class="about-card featured">
-                <div class="about-icon">💝</div>
-                <h3>Ce iubesc cel mai mult la tine</h3>
-                <ul class="love-list">
-                    <li>Zâmbetul tău care îmi luminează zilele</li>
-                    <li>Felul în care mă înțelegi fără cuvinte</li>
-                    <li>Râsul tău contagios</li>
-                    <li>Căldura îmbrățișărilor tale</li>
-                    <li>Bunătatea și compasiunea ta</li>
-                    <li>Modul în care mă faci să mă simt special(ă)</li>
-                    <li>Că ești tu, exact așa cum ești</li>
-                </ul>
-            </div>
-            
-            <div class="about-card">
-                <div class="about-icon">🌟</div>
-                <h3>Planurile noastre</h3>
-                <p>✨ Să călătorim împreună în locuri noi<br>
-                   ✨ Să creăm amintiri frumoase în fiecare zi<br>
-                   ✨ Să construim un viitor plin de iubire și fericire</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery">
-        <div class="container">
-            <h2>Momentele Noastre Speciale</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=500" alt="Moment special 1">
-                    <div class="gallery-overlay">
-                        <span>Prima întâlnire</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500" alt="Moment special 2">
-                    <div class="gallery-overlay">
-                        <span>Zâmbete și râsete</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500" alt="Moment special 3">
-                    <div class="gallery-overlay">
-                        <span>Plimbări romantice</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1522673607177-f9e6e4914c49?w=500" alt="Moment special 4">
-                    <div class="gallery-overlay">
-                        <span>Aventuri împreună</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=500" alt="Moment special 5">
-                    <div class="gallery-overlay">
-                        <span>Apusuri magice</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?w=500" alt="Moment special 6">
-                    <div class="gallery-overlay">
-                        <span>Momente de tandrețe</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=500" alt="Moment special 7">
-                    <div class="gallery-overlay">
-                        <span>Iubire necondiționată</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1516589091380-5d8e87df6999?w=500" alt="Moment special 8">
-                    <div class="gallery-overlay">
-                        <span>Pentru totdeauna</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ești gata?</h2>
-            <p>Să începem această călătorie magică împreună!</p>
-            <a href="calendar.html" class="cta-button">
-                Începem Adventul? 🎄
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>Făcut cu drag pentru tine <span class="heart-pulse">❤️</span></p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Se încarcă... ❤️</p>
+        <p><a href="intro.html" style="color: white;">Click aici dacă nu ești redirecționat automat</a></p>
+    </div>
 </body>
 </html>
