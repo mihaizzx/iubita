@@ -80,26 +80,71 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 3D card tilt effect
-    cards.forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    // 3D card tilt effect - Desktop (mouse) + Mobile (gyroscope)
+    let gyroPermissionGranted = false;
+    
+    // Check if device supports orientation
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile && window.DeviceOrientationEvent) {
+        // Request permission for iOS 13+
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            // Add a tap listener to request permission
+            document.addEventListener('click', function requestGyro() {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            gyroPermissionGranted = true;
+                            enableGyroTilt();
+                        }
+                    })
+                    .catch(console.error);
+                document.removeEventListener('click', requestGyro);
+            }, { once: true });
+        } else {
+            // Android or older iOS - no permission needed
+            gyroPermissionGranted = true;
+            enableGyroTilt();
+        }
+    }
+    
+    function enableGyroTilt() {
+        window.addEventListener('deviceorientation', function(event) {
+            const beta = event.beta;   // -180 to 180 (front-back tilt)
+            const gamma = event.gamma; // -90 to 90 (left-right tilt)
             
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            cards.forEach(card => {
+                // Normalize values for better effect
+                const rotateX = Math.max(-20, Math.min(20, beta / 3));
+                const rotateY = Math.max(-20, Math.min(20, gamma / 3));
+                
+                card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
         });
-        
-        card.addEventListener('mouseleave', function() {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    }
+    
+    // Desktop mouse tilt (only if not mobile)
+    if (!isMobile) {
+        cards.forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
         });
-    });
+    }
 
     // Add ripple effect to CTA button
     const ctaButton = document.querySelector('.cta-button');
