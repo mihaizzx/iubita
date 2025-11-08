@@ -279,8 +279,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Gallery item click to enlarge
+    // Gallery item click to enlarge (images only, not videos)
     galleryItems.forEach(item => {
+        // Skip video gallery items
+        if (item.classList.contains('gallery-video')) {
+            return;
+        }
+        
         const img = item.querySelector('img');
         if (img) {
             img.addEventListener('click', function() {
