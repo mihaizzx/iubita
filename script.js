@@ -80,50 +80,137 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 3D card tilt effect - Desktop (mouse) + Mobile (gyroscope)
+    // 3D card tilt effect - Desktop (mouse) + Mobile (gyroscope + touch)
     let gyroPermissionGranted = false;
+    let gyroSupported = false;
     
     // Check if device supports orientation
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     
-    console.log('Device detection:', { isMobile, hasDeviceOrientation: !!window.DeviceOrientationEvent, cardsFound: cards.length });
+    console.log('Device detection:', { 
+        isMobile, 
+        isIOS,
+        hasDeviceOrientation: !!window.DeviceOrientationEvent, 
+        cardsFound: cards.length,
+        needsPermission: typeof DeviceOrientationEvent?.requestPermission === 'function'
+    });
     
+    // Enable touch tilt for mobile devices
+    function enableTouchTilt() {
+        console.log('Touch tilt enabled for mobile!');
+        
+        cards.forEach(card => {
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let currentRotateX = 0;
+            let currentRotateY = 0;
+            
+            card.addEventListener('touchstart', function(e) {
+                const touch = e.touches[0];
+                const rect = card.getBoundingClientRect();
+                touchStartX = touch.clientX - rect.left;
+                touchStartY = touch.clientY - rect.top;
+            }, { passive: true });
+            
+            card.addEventListener('touchmove', function(e) {
+                if (gyroSupported) return; // Use gyro if available
+                
+                const touch = e.touches[0];
+                const rect = card.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                currentRotateX = (y - centerY) / 8;
+                currentRotateY = (centerX - x) / 8;
+                
+                card.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            }, { passive: true });
+            
+            card.addEventListener('touchend', function() {
+                if (!gyroSupported) {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                }
+            });
+        });
+    }
+    
+    // Try to enable gyroscope
     if (isMobile && window.DeviceOrientationEvent) {
         // Request permission for iOS 13+
         if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-            console.log('iOS device detected - will request permission on first interaction');
-            // Add a tap listener to request permission
-            const requestGyro = function() {
+            console.log('iOS device detected - click/tap anywhere to enable motion');
+            
+            // Create a visible button for iOS users
+            const motionButton = document.createElement('button');
+            motionButton.textContent = '📱 Activează Mișcare 3D';
+            motionButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 9999;
+                padding: 15px 30px;
+                background: linear-gradient(135deg, var(--wine-red), var(--gold));
+                color: white;
+                border: none;
+                border-radius: 50px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 10px 30px rgba(139, 38, 53, 0.4);
+                animation: pulse 2s infinite;
+            `;
+            
+            document.body.appendChild(motionButton);
+            
+            motionButton.addEventListener('click', function() {
                 console.log('Requesting gyroscope permission...');
                 DeviceOrientationEvent.requestPermission()
                     .then(permissionState => {
                         console.log('Gyroscope permission:', permissionState);
                         if (permissionState === 'granted') {
                             gyroPermissionGranted = true;
+                            gyroSupported = true;
                             enableGyroTilt();
+                            motionButton.remove();
+                        } else {
+                            console.log('Permission denied, using touch fallback');
+                            motionButton.textContent = '✋ Folosește Touch (permisiune refuzată)';
+                            setTimeout(() => motionButton.remove(), 3000);
                         }
                     })
                     .catch(err => {
                         console.error('Gyroscope permission error:', err);
+                        motionButton.textContent = '✋ Folosește Touch';
+                        setTimeout(() => motionButton.remove(), 3000);
                     });
-                document.removeEventListener('click', requestGyro);
-                document.removeEventListener('touchstart', requestGyro);
-            };
-            
-            document.addEventListener('click', requestGyro);
-            document.addEventListener('touchstart', requestGyro);
+            }, { once: true });
         } else {
             // Android or older iOS - no permission needed
             console.log('Android/older iOS detected - enabling gyroscope directly');
             gyroPermissionGranted = true;
+            gyroSupported = true;
             enableGyroTilt();
         }
+        
+        // Always enable touch as fallback
+        enableTouchTilt();
     }
     
     function enableGyroTilt() {
         console.log('Gyroscope tilt enabled! Tilt your phone to see cards move.');
         
+        let lastUpdate = 0;
         window.addEventListener('deviceorientation', function(event) {
+            // Throttle updates to 60fps
+            const now = Date.now();
+            if (now - lastUpdate < 16) return;
+            lastUpdate = now;
+            
             const beta = event.beta;   // -180 to 180 (front-back tilt)
             const gamma = event.gamma; // -90 to 90 (left-right tilt)
             
@@ -162,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     } else {
-        console.log('Mobile detected - mouse events disabled');
+        console.log('Mobile detected - touch/gyro modes active');
     }
 
     // Add ripple effect to CTA button
@@ -257,6 +344,16 @@ style.textContent = `
     @keyframes zoomIn {
         from { transform: scale(0.8); opacity: 0; }
         to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes pulse {
+        0%, 100% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 10px 30px rgba(139, 38, 53, 0.4);
+        }
+        50% {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 15px 40px rgba(139, 38, 53, 0.6);
+        }
     }
 `;
 document.head.appendChild(style);
