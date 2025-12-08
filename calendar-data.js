@@ -1,58 +1,58 @@
 // Date pentru fiecare zi din calendar
 const calendarData = {
     1: {
-        image: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=800",
-        memory: "Îți amintești prima noastră întâlnire? Parcă a fost ieri...",
-        message: "Ziua 1 - Încă din prima clipă am știut că ești special(ă). Zâmbetul tău a luminat toată ziua mea.",
-        task: "Astăzi ne facem o fotografie frumoasă împreună!"
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     2: {
-        image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800",
-        memory: "Acel moment când am râs împreună până ne-au dat lacrimile",
-        message: "Ziua 2 - Râsul tău este muzica preferată a inimii mele.",
-        task: "Seara asta ne uităm la filmul nostru preferat împreună."
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     3: {
-        image: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=800",
-        memory: "Prima noastră plimbare de mână lungă prin parc",
-        message: "Ziua 3 - Fiecare pas alături de tine este o aventură pe care o iubesc.",
-        task: "Facem o plimbare romantică în aer liber."
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     4: {
-        image: "https://images.unsplash.com/photo-1522673607177-f9e6e4914c49?w=800",
-        memory: "Când am descoperit pasiunea noastră comună",
-        message: "Ziua 4 - Cu tine, fiecare experiență devine o amintire prețioasă.",
-        task: "Pregătim cina împreună astăzi!"
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     5: {
-        image: "https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=800",
-        memory: "Acel apus de soare magic pe care l-am privit împreună",
-        message: "Ziua 5 - Tu ești cel mai frumos cadou pe care viața mi l-a oferit.",
-        task: "Privim împreună stelele în seara asta."
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     6: {
-        image: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?w=800",
-        memory: "Momentul când mi-ai spus pentru prima dată că mă iubești",
-        message: "Ziua 6 - Dragostea ta mă face să fiu o persoană mai bună în fiecare zi.",
-        task: "Îți spun 10 lucruri pe care le iubesc la tine."
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     7: {
-        image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800",
-        memory: "Primul nostru Crăciun împreună",
-        message: "Ziua 7 - Îmi place cum râzi și cum îmi luminezi ziua.",
-        task: "Seara asta bem vin fiert împreună!"
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     8: {
-        image: "https://images.unsplash.com/photo-1516589091380-5d8e87df6999?w=800",
-        memory: "Când am dansat împreună prima dată",
-        message: "Ziua 8 - În brațele tale am găsit căminul meu.",
-        task: "Dansăm pe melodia noastră preferată."
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     9: {
-        image: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=800",
-        memory: "Acea surpriză pe care mi-ai făcut-o",
-        message: "Ziua 9 - Fiecare zi cu tine este o binecuvântare.",
-        task: "Îți fac o surpriză mică astăzi!"
+        image: "",
+        memory: "",
+        message: "",
+        task: ""
     },
     10: {
         image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=800",
