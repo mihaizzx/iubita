@@ -99,9 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
             modalBody.innerHTML = `
                 <h2 class="modal-day-title">Ziua ${dayNumber} </h2>
                 <img src="${data.image}" alt="Ziua ${dayNumber}" class="modal-image">
-                <div class="modal-memory">
-                    <strong> Amintire:</strong> ${data.memory}
-                </div>
                 <div class="modal-message">
                     ${data.message}
                 </div>
