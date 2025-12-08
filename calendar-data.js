@@ -3,55 +3,55 @@ const calendarData = {
     1: {
         image: "images/calendar1.png",
         memory: "",
-        message: "",
+        message: "Esti cea mai superba femeie din univers",
         task: ""
     },
     2: {
         image: "images/calendar2.png",
         memory: "",
-        message: "",
+        message: "Te iubesc super extra foarte enorm de mult!",
         task: ""
     },
     3: {
         image: "images/calendar3.png",
         memory: "",
-        message: "",
+        message: "Esti cea mai tare persoana pe care am cunoscut-o vreodata",
         task: ""
     },
     4: {
         image: "images/calendar4.png",
         memory: "",
-        message: "",
+        message: "Iubesc sa ma pierd de fiecare data in ochii tai frumosi",
         task: ""
     },
     5: {
         image: "images/calendar5.png",
         memory: "",
-        message: "",
+        message: "Tu esti safe-place ul meu",
         task: ""
     },
     6: {
         image: "images/calendar6.png",
         memory: "",
-        message: "",
+        message: "Iubesc sa radem impreuna",
         task: ""
     },
     7: {
         image: "images/calendar7.png",
         memory: "",
-        message: "",
+        message: "Iubesc sa ne simtim bine!",
         task: ""
     },
     8: {
         image: "images/calendar8.png",
         memory: "",
-        message: "",
+        message: "Iti iubesc pupiciii!",
         task: ""
     },
     9: {
         image: "images/calendar9.png",
         memory: "",
-        message: "",
+        message: "Iubesc fiecare minut pe care il petrecem impreuna",
         task: ""
     },
     10: {
