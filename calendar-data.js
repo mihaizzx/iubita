@@ -55,10 +55,10 @@ const calendarData = {
         task: ""
     },
     10: {
-        image: "images/calendar1.png",
-        memory: "Când am stat treji toată noaptea vorbind",
-        message: "Ziua 10 - Conversațiile noastre sunt cele mai prețioase momente.",
-        task: "Ne facem timp pentru o discuție sinceră în seara asta."
+        image: "images/calendar10.png",
+        memory: "",
+        message: "Mi-e dor de noi, te iubesc!",
+        task: ""
     },
     11: {
         image: "images/calendar2.png",
